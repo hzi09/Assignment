@@ -1,11 +1,13 @@
 # 숫자 맞추기 게임
 
----
+
 ## 🗂️Directory Structure
 
 - `README.md` : 디렉토리 구조, 과제 내용, 입출력 예시
 - `number-guess-game_v1` : 메인 과제 코드
 - `number-guess-game_v2` : 추가 도전 과제 코드
+
+<br>
 
 ## 📝과제 내용
 1. 플레이어와 컴퓨터가 참여하는 숫자 맞추기 게임을 만드세요. 
