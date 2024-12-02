@@ -24,17 +24,17 @@ while True :
             print("정답입니다!")
 
             # 정답을 맞추면 게임을 다시 시작할지 결정
-            message = input("게임을 다시 시작하시겠습니까? (y/n) :")
+            message = input("게임을 다시 시작하시겠습니까? (y/n) :").lower()
 
             # y이나 Y가 입력되면 while문을 다시 실행하여 게임을 다시 시작
-            if message == 'y' or message == 'Y' :
+            if message == 'y' :
                 # 랜덤으로 숫자를 다시 설정함
                 n = rd.randint(1, 10)
                 print("1과 10 사이의 숫자를 하나 정했습니다.\n이 숫자는 무엇일까요? ")
                 continue
 
             # n이나 N이 입력되면 while문을 종료하여 게임 종료
-            elif message == 'n' or message == 'N' :
+            elif message == 'n' :
                 print("게임을 종료합니다. 즐거우셨나요? 또 만나요!")
                 break
 
