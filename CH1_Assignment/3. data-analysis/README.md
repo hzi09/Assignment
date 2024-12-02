@@ -2,7 +2,7 @@
 
 
 ## 🗂️Directory Structure
-- `README.md` : 디렉토리 구조, 과제 내용, 입출력 예시
+- `README.md` : 디렉토리 구조, 과제 내용, 입출력 예시, 문제 풀이
 - `data-analysis_v1` : 메인 과제 코드
 - `data-analysis_v2` : 추가 도전 과제 코드
 - `pop_kor.csv` : 추가 도전 과제 데이터 .csv 파일
