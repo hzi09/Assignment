@@ -1,5 +1,6 @@
 import pandas as pd
 
+#  엑셀 파일을 불러오기
 df_police = pd.read_excel('관서별 5대범죄 발생 및 검거.xlsx')
 
 # 매핑할 데이터 딕셔너리 형태로 생성
@@ -15,8 +16,10 @@ division = {'서대문서': '서대문구', '수서서': '강남구', '강서서
 # 새로운 열 추가 : '구별' 열을 생성하고 '관서명' 열을 복사한 후 division으로 매핑
 df_police['구별'] = df_police['관서명'].map(division)
 
+# 구별 열에 빈데이터는 '구 없음'을 할당
 df_police.fillna({'구별':'구 없음'}, inplace = True)
 
+# index는 '구별'데이터로 변경, 같은 구의 경우에는 'sum'을 적용하여 더함
 df_police = pd.pivot_table(df_police,
                            values =['소계(발생)', '소계(검거)', '살인(발생)',
                                     '살인(검거)', '강도(발생)', '강도(검거)',
@@ -25,30 +28,44 @@ df_police = pd.pivot_table(df_police,
                            index = '구별', aggfunc= 'sum')
 
 
-
+# 구 없음 행 삭제
 df_police.drop(labels = '구 없음',axis=0, inplace = True)
 
+# 범죄 검거율을 구하는 함수 : (_(검거)/_(발생))*100을 하여 구함
 def percent() :
+    # 범죄 리스트
     per_list = ['강간', '강도', '살인', '절도', '폭력']
+    # 범죄 리스트의 검거율을 구하고 '범죄'검거율로 column명 번경
     for i in per_list :
         df_police[f'{i}검거율']  = (df_police[f'{i}(검거)'] / df_police[f'{i}(발생)']) * 100
+    # 소계검거율은 이름이 그냥 검거율이기 때문에 따로 선언함
     df_police['검거율'] = (df_police['소계(검거)'] / df_police['소계(발생)']) * 100
+
 percent()
 
+# 필요없는 열을 삭제하는 함수
 def delete() :
+    # 삭제할 컬럼 리스트
     del_list = ['강간', '강도', '살인', '절도', '폭력', '소계']
+    # _(검거) 항목 삭제
     for i in del_list :
         del df_police[f'{i}(검거)']
+    # 소계(발생)은 따로 삭제
     del df_police['소계(발생)']
+
 delete()
 
+# 컬럼명을 변경해주는 함수
 def rename() :
+    # 변경할 컬럼명
     name = ['강간', '강도', '살인', '절도', '폭력']
+    # _(발생) 컴럼은 _ 로 변경한다
     for i in name :
         df_police.rename(columns= {f'{i}(발생)' : f'{i}'}, inplace= True)
 
 rename()
 
-
+# 추가도전과제 코드에서 print 되는 것을 막기 위해 사용
 if __name__ == "__main__" :
+    # 데이터 프레임 출력
     print(df_police)

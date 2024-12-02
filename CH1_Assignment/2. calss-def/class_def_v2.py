@@ -32,7 +32,7 @@ while True :
     # 성별을 입력받음
     user_gender = input("성별: ")
     #성별이 male, female이면 코드 종료!
-    if user_gender == 'male' or user_gender == 'female' :
+    if user_gender in ['male', 'female'] :
         break
     # 성별이 male, female이 아니면 오류메시지 출력 후 while문 다시 반복
     else :
