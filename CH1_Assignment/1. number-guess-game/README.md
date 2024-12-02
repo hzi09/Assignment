@@ -1,4 +1,4 @@
-# 숫자 맞추기 게임
+# 1. 숫자 맞추기 게임
 
 
 ## 🗂️Directory Structure
