@@ -13,7 +13,7 @@
 ## 📝과제 내용
 - Python 라이브러리를 활용하여 주어진 데이터(.xlxs)를 분석 Quiz를 수행해주세요.
 
-### ⭐ Quiz
+### Quiz
 1. Python 라이브러리 함수를 사용하여 엑셀 파일을 불러오고, DataFrame을 출력해주세요.
 2. 각 경찰서(`관서명`)를 해당 구 이름으로 매핑하여 '구별'이라는 새로운 column을 생성하고, DataFrame을 출력해주세요.
    - 매칭되지 않는 경찰서명에 대해서는 기본값 `'구 없음'`을 할당합니다.
@@ -51,7 +51,7 @@
     ```
 
 
-### ✅입출력 예시
+### 입출력 예시
 ```
 	강간	강도	살인	절도	폭력	강간검거율	강도검거율	살인검거율	절도검거율	폭력검거율	검거율
 구별											
@@ -241,6 +241,48 @@
     
     rename()
     ```
+
+## 🔥 도전 과제 풀이
+
+1. Python 라이브러리 함수를 사용하여 인구 데이터(pop_kor.csv) 파일을 불러오고, DataFrame을 출력
+    - 코드를 다시 넣을까 하다가 간단하게 풀릴 문제인데 싶어서 `for _ imoport`를 사용하기로 했다.
+    - 여기서 이슈가 발생!
+        - 앞서 `print(df_police)`를 사용했기 때문에 이 결과 값이 출력된다.
+        - 그래서 생각해낸 방법이 아래의 코드를 메인 과제 코드에 추가해줌!
+            
+          ```python
+          # 추가도전과제 코드에서 print 되는 것을 막기 위해 사용
+          if __name__ == "__main__" :
+              # 데이터 프레임 출력
+              print(df_police)
+          ```
+
+    ```python
+    import pandas as pd
+    
+    # 메인 과제 코드(data_analysis_v1)에서 df_police를 불러옴
+    from data_analysis_v1 import df_police
+    
+    # csv 파일을 불러오고, index는 '구별'로 설정
+    df_person = pd.read_csv('pop_kor.csv', index_col = '구별')
+    ```
+    
+
+2. `join` 을 사용하여 Quiz에서 수행한 DataFrame과 인구 데이터 DataFrame을 merge하고, DataFrame을 출력
+    - `join`을 사용하여 merge 하였다.
+    - 검거율은 오름차순으로 `sort_values`를 사용하여 정렬하였다.
+    
+    ```python
+    # 두 데이터 프레임을 merge 해줌
+    df_joined = df_person.join(df_police)
+    
+    # 검거율을 기준으로 오름차수 정렬
+    df_joined.sort_values(by = '검거율', ascending=True, inplace = True)
+    
+    # 데이터 프레임 출력
+    print(df_joined)
+    ```
+
 
 <br>    
 
