@@ -12,11 +12,18 @@
 
     <hr>
 
-    <a href="{% url 'posts:post_list' %}"><button>목록 보기</button></a>
-    <form action="{% url 'posts:post_update' post.pk %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">수정</button>
+    <form action="{% url 'posts:post_update' post.pk %}" style="display: inline;">
+        <button type="submit">수정하기</button>
     </form>
+
+    <form action="{% url 'posts:post_delete' post.pk %}" style="display: inline;">
+        <button type="submit">삭제하기</button>
+    </form>
+
+    <hr>
+    <a href="{% url 'posts:post_list' %}">
+        <button>글 목록 보기</button>
+    </a>
+
 
 {% endblock content %}

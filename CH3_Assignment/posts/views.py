@@ -35,6 +35,7 @@ def post_create(request):
 
 def post_update(request, pk):
     post = get_object_or_404(Post, pk=pk)
+    print(post.title)
     if request.method == 'POST':
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
@@ -48,3 +49,19 @@ def post_update(request, pk):
         'post': post,
     }
     return render(request, 'posts/post_form.html', context)
+
+
+def post_delete(request, pk) : 
+    # 삭제할 post 객체를 가져오기
+    post = get_object_or_404(Post, pk=pk)
+
+    # POST 요청이 오면 삭제
+    if request.method == "POST":
+        post.delete()
+        # 삭제 후에 목록 페이지로
+        return redirect("posts:post_list")
+    # GET 요청이 오면 삭제 확인 페이지
+    context = {
+        'post' : post
+    }
+    return render(request, "posts/post_confirm_delete.html", context)
