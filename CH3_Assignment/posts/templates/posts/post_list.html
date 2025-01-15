@@ -3,4 +3,10 @@
 {% block content %}
     <h1>글 목록</h1>
 
+{{% for post in posts %}
+    <p>{{ post.id }}</p>
+    <p>[{{ article.pk }}] {{ article.title }}</p>
+
+{% endfor %}}
+
 {% endblock content %}
