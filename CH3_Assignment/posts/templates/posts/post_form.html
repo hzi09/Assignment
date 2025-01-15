@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    {% if post %}
+        <h1>게시글 수정</h1>
+        
+        <form action="{% url 'posts:post_update' post.pk %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">수정</button>
+        </form>
+
+    {% else %}
+        <h1>게시글 작성</h1>
+        
+        <form action="{% url 'posts:post_create' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">저장</button>
+        </form>
+    {% endif %}
+
+<hr>
+
+<a href="{% url 'posts:post_list' %}">
+    <button>목록으로</button>
+</a>
+
+<hr>
+
+{% endblock content %}

@@ -2,11 +2,14 @@
 
 {% block content %}
     <h1>글 목록</h1>
+    <a href="{% url 'posts:post_create' %}">
+        <button>새 글 작성</button>
+    </a>
 
-{{% for post in posts %}
-    <p>{{ post.id }}</p>
-    <p>[{{ article.pk }}] {{ article.title }}</p>
-
-{% endfor %}}
+{% for post in posts %}
+    <p>[{{ post.pk }}] 
+        <a href="{% url 'posts:post_detail' post.pk %}">{{ post.title }} </a>
+    </p>
+{% endfor %}
 
 {% endblock content %}
