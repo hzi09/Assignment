@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <!--프로필 보기 -->
+    <h2>{{ user.username }}'s Profile</h2>
+
+    <img src="{{ user.profile_img.url }}" alt="Profile Image" width="150">
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Bio:</strong> {{ user.bio }}</p>
+    <p><strong>Birth Date:</strong> {{ user.birth_date|date:"Y년 m월 d일" }}</p>
+    <p><strong>Address:</strong> {{ user.address }}</p>
+
+
+    <!--프로필 수정하기 -->
+    {% if form %}
+        <hr>
+        <h3>Edit Your Profile</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">프로필 수정하기</button>
+        </form>
+    {% endif %}
+{% endblock %}
