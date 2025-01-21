@@ -75,3 +75,16 @@ def post_delete(request, pk):
         'post': post
     }
     return render(request, "posts/post_confirm_delete.html", context)
+
+
+@require_POST
+def like(request, pk):
+    if request.user.is_authenticated:
+        post = get_object_or_404(Post, pk=pk)
+        if post.like_users.filter(pk=request.user.pk).exists():
+            post.like_users.remove(request.user)   # 좋아요 취소
+        else :
+            post.like_users.add(request.user)      # 좋아요
+        return redirect('posts:post_detail', pk=post.pk)
+    return redirect('users:login')
+        

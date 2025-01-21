@@ -11,5 +11,7 @@
             [{{ post.pk }}] 
             <a href="{% url 'posts:post_detail' post.pk %}">{{ post.title }}</a>
         </p>
+        <p>♥️좋아요 {{ post.like_users.count }}</p>
+        <hr>
     {% endfor %}
 {% endblock content %}
