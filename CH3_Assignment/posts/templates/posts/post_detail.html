@@ -3,27 +3,29 @@
 {% block content %}
 
     <h1>글 상세 페이지</h1>
-    <h2>{{ post.title }} </h2>
-    <p>작성자 : {{ post.author.username }} | 작성일시: {{ post.created_at|date:'Y-m-d H:i:j' }} | 수정일시: {{ post.updated_at|date:'Y-m-d H:i:j' }}</p>
+    <h2>{{ post.title }}</h2>
+    <p>작성자 : {{ post.author.username }} | 작성일시: {{ post.created_at|date:'Y-m-d H:i:s' }} | 수정일시: {{ post.updated_at|date:'Y-m-d H:i:s' }}</p>
     
     <hr>
 
-    <p> {{ post.content }}</p>
+    <p>{{ post.content }}</p>
 
     <hr>
 
-    <form action="{% url 'posts:post_update' post.pk %}" style="display: inline;">
-        <button type="submit">수정하기</button>
-    </form>
+    {% if post.author == request.user %}
+        <form action="{% url 'posts:post_update' post.pk %}" style="display: inline;">
+            <button type="submit">수정하기</button>
+        </form>
 
-    <form action="{% url 'posts:post_delete' post.pk %}" style="display: inline;">
-        <button type="submit">삭제하기</button>
-    </form>
-
+        <form action="{% url 'posts:post_delete' post.pk %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit">삭제하기</button>
+        </form>
     <hr>
+    {% endif %}
+
     <a href="{% url 'posts:post_list' %}">
         <button>글 목록 보기</button>
     </a>
-
 
 {% endblock content %}

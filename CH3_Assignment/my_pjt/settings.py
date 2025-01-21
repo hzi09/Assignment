@@ -88,6 +88,7 @@ DATABASES = {
     }
 }
 
+LOGIN_URL = '/users/login/'
 
 AUTH_USER_MODEL = 'users.CustomUser'
 
