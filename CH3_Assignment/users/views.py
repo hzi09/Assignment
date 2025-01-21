@@ -65,10 +65,12 @@ def user_profile(request, username):
             # 사용자 데이터로 폼을 채움
             form = CustomUserProfileForm(instance=user)
     else :
+        # 다른 사용자의 프로필에서는 form 표시하지 않기
         form = None
 
     context = {
         'form': form,
         'user': user,
+        'is_owner': user == request.user, # 현재 로그인한 사용자가 해당 프로필의 소유자인지 여부
     }
     return render(request, 'users/user_profile.html', context)

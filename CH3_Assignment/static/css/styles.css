@@ -1,0 +1,58 @@
+/* 기본 설정 */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%; /* 화면 전체 높이를 채움 */
+    display: flex;
+    flex-direction: column;
+}
+
+/* 네비게이션 바 */
+.navbar {
+    position: fixed; /* 화면 상단에 고정 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #836489;
+    color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    z-index: auto;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    background-color: #495057;
+    border-radius: 5px;
+}
+
+/* 콘텐츠 영역 */
+.container {
+    flex: 1; 
+    padding: 60px;
+}
+
+/* 푸터 */
+.footer {
+    background-color: #836489;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}

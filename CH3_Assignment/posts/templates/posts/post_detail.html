@@ -4,7 +4,7 @@
 
     <h1>글 상세 페이지</h1>
     <h2>{{ post.title }}</h2>
-    <p>작성자 : {{ post.author.username }} | 작성일시: {{ post.created_at|date:'Y-m-d H:i:s' }} | 수정일시: {{ post.updated_at|date:'Y-m-d H:i:s' }}</p>
+    <p>작성자 : <a href="{% url 'users:user_profile' post.author.username %}" >{{ post.author.username }}</a> | 작성일시: {{ post.created_at|date:'Y-m-d H:i:s' }} | 수정일시: {{ post.updated_at|date:'Y-m-d H:i:s' }}</p>
     
     <hr>
 
