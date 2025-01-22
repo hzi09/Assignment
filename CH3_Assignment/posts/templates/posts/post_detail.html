@@ -3,15 +3,18 @@
 {% block content %}
 
     <h1>글 상세 페이지</h1>
+    <!-- 글 정보 -->
     <h2>{{ post.title }}</h2>
     <p>작성자 : <a href="{% url 'users:user_profile' post.author.username %}" >{{ post.author.username }}</a> | 작성일시: {{ post.created_at|date:'Y-m-d H:i:s' }} | 수정일시: {{ post.updated_at|date:'Y-m-d H:i:s' }}</p>
-    <p>♥️좋아요 {{ post.like_users.count }}</p>
+    <p>♥️좋아요 {{ post.like_users.count }} | 🗨️댓글 {{ comments|length }}</p>
 
     <hr>
-
+    <!-- 글 본문 -->
     <p>{{ post.content }}</p>
 
     <hr>
+
+    <!-- 좋아요 -->
     <form action="{% url 'posts:like' post.pk %}" method="POST">
         {% csrf_token %}
         {% if request.user in post.like_users.all %}
@@ -22,6 +25,7 @@
     </form>
     <hr>
 
+    <!-- 글 작성자에게만 수정하기, 삭제하기 보여주기 -->
     {% if post.author == request.user %}
         <form action="{% url 'posts:post_update' post.pk %}" style="display: inline;">
             <button type="submit">수정하기</button>
@@ -34,8 +38,46 @@
     <hr>
     {% endif %}
 
+    <!-- 목록으로 돌아가기  -->
     <a href="{% url 'posts:post_list' %}">
         <button>글 목록 보기</button>
     </a>
+    <hr>
+
+    <!-- 댓글 작성하기-->
+    <h3>댓글 {{ comments|length }}개</h3>
+        <form action="{% url 'posts:comment_create' post.pk %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+        <input type="submit" value="작성">
+    </form>
+
+    <!--댓글 목록 -->
+    {% for comment in comments %}
+        <p>{{ comment.content }} | 작성자 : <strong>{{comment.comment_user}}</strong> | {{ comment.created_at|date:'Y-m-d H:i:s' }}</p>
+            
+            <!--댓글 삭제하기-->
+            <form action="{% url 'posts:comment_delete' post.pk comment.pk%}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <input type="submit" value="삭제">
+            </form>
+
+            <!-- 수정 버튼 -->
+            {% if comment.comment_user == request.user %}
+                <form action="{% url 'posts:post_detail' pk=post.pk %}" method="get" style="display: inline;">
+                    <button type="submit" name="edit_comment" value="{{ comment.pk }}">수정</button>
+                </form>
+            {% endif %}
+
+            <!-- 수정 폼 -->
+            {% if edit_comment == comment.pk %}
+                <form action="{% url 'posts:comment_update' pk=post.pk comment_pk=comment.pk %}" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="content" value="{{ comment.content }}" required>
+                    <button type="submit">수정 완료</button>
+                </form>
+            {% endif %}
+        <hr>
+{% endfor %}
 
 {% endblock content %}
