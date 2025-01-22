@@ -1,7 +1,4 @@
-from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST, require_http_methods
-from .forms import PostForm, CommentForm
+from django.shortcuts import get_object_or_404, render
 from .models import Post, Comment
 from rest_framework.views import APIView
 from rest_framework.response import Response
