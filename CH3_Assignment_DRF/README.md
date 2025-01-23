@@ -1,4 +1,4 @@
-# 1. User와 Post 앱 개발 (MTV 패턴)
+# 2. DRF(Django Rest Framework)
 
 ## 🗂️Directory Structure
 ```
