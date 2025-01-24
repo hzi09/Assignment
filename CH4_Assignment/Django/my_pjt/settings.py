@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Apps
     'posts',
     'users',
+    'chatbot',
 ]
 
 MIDDLEWARE = [

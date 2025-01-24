@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>🤖hello! I'm Python Tutor</h1>
+    <h2>모르는 파이썬 함수가 있다면 검색해보세요!</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="user_message" rows="4" cols="50" placeholder="Ask me anything..."></textarea>
+        <button type="submit">질문하기</button>
+    </form>
+
+
+        <ul class="history">
+            {% for chat in chat_history %}
+                <li class="history-item">
+                    <p class="user-message"> 질문 : {{ chat.user_message }}</p>
+                    <pre class="bot-response"> 답변 {{ chat.gpt_message }}</pre>
+                </li>
+            {% endfor %}
+
+
+{% endblock content %}
