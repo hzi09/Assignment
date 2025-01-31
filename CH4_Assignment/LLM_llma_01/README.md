@@ -1,3 +1,15 @@
+# 🗂️Directory Structure
+```
+📦main
+ ┣ 📜Figure_1.png   # 상위 10개 단어 그래프 이미지
+ ┣ 📜main.py        # 기본 예제
+ ┣ 📜main2.py       # CPU/GPQ 비교
+ ┣ 📜main3.py       # LLMA에게 번역까지 시킨 예제
+ ┗ 📜main4.py       # DB 저장 예제
+```
+
+<br>
+
 # Prompt Engineering 
 - AI 모델(특히 LLM)과 효과적으로 상호작용하기 위해 프롬프트(입력 문구)를 최적화하는 기술
 - 성능을 극대화하기 위한 기술로 다음의 요소가 포함됨
@@ -248,3 +260,12 @@ model = AutoModelForCausalLM.from_pretrained(
 - CPU는 속도가 느리고, CPU 사용률이 급격히 증가
 - GPU는 속도가 빠르며, VRAM을 많이 사용
 - GPU+CPU의 경우 GPU의 메모리가 부족한 경우 유용
+
+<br>
+
+# DB 저장하기
+- 번역의 퀄리티가 너무 좋지 않아서 이상한 단어도 추출하고 '~의'가 붙는 것도 단어로 판정
+  - 이건 내가 수정할 필요가 있음🤔
+- 한국의 여행지를 추천해달라고 해서 '한국'이 가장 많이 나온 것으로 예상
+
+  ![Image](https://github.com/user-attachments/assets/e716ba21-9d3d-40d7-ade8-2314502abc09)
