@@ -10,6 +10,8 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 media
+config.py
+
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
@@ -141,6 +143,7 @@ env.bak/
 venv.bak/
 gpt_env/
 llma_env/
+drf-env/
 
 # Spyder project settings
 .spyderproject
